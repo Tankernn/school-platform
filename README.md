@@ -1,24 +1,32 @@
-# README
+# SchoolPlatform
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a platform for interaction between students, teachers and administrative staff in a school environment.
 
-Things you may want to cover:
+## License
+All SchoolPlatform source code is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for details.
 
-* Ruby version
+## Getting started
 
-* System dependencies
+To get started with the app, clone the repo and then install the needed gems:
 
-* Configuration
+```
+$ bundle install --without production
+```
 
-* Database creation
+Next, migrate the database:
 
-* Database initialization
+```
+$ rails db:migrate
+```
 
-* How to run the test suite
+Finally, run the test suite to verify that everything is working correctly:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ rails test
+```
 
-* Deployment instructions
+If the test suite passes, you'll be ready to run the app in a local server:
 
-* ...
+```
+$ rails server
+```
