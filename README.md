@@ -30,3 +30,6 @@ If the test suite passes, you'll be ready to run the app in a local server:
 ```
 $ rails server
 ```
+
+## Credit
+- The layout of this app is based on the [SB Admin 2](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2) template, Copyright (c) 2013-2017 Blackrock Digital LLC, provided under the MIT License.
