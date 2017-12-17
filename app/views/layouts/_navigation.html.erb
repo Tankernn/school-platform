@@ -16,14 +16,14 @@
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li>
-                  <%= link_to fa_icon("user fw", text: "User Profile"), "#" %>
+                  <%= link_to fa_icon("user fw", text: "User Profile"), current_user %>
                 </li>
                 <li>
                   <%= link_to fa_icon("gear fw", text: "Settings"), "#" %>
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <%= link_to fa_icon("sign-out fw", text: "Logout"), "#" %>
+                  <%= link_to fa_icon("sign-out fw", text: "Logout"), logout_path, method: :delete %>
                 </li>
             </ul>
         </li>
