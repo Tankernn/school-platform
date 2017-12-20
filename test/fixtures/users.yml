@@ -5,9 +5,11 @@ daniel:
   name: Daniel Smith
   email: daniel.smith@example.com
   password_digest: <%= User.digest('password') %>
+  birth_date: <%= 27.years.ago %>
 
 ben:
   login: ben_4321
   name: Ben Jones
   email: ben.jones@example.com
   password_digest: <%= User.digest('password') %>
+  birth_date: <%= 29.years.ago %>

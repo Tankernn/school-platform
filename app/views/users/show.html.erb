@@ -5,6 +5,20 @@
       <h1>
         <%= @user.name %>
       </h1>
+      <ul>
+        <li class="user-gender">
+          Gender: <%= @user.gender.capitalize %>
+        </li>
+        <li class="user-age">
+          Age: <%= age_in_completed_years @user.birth_date %> years
+        </li>
+        <li class="user-email">
+          <%=  link_to fa_icon("envelope fw", text: @user.email), "mailto:#{@user.email}" %>
+        </li>
+        <li class="user-phone">
+          <%= fa_icon("phone fw", text: @user.phone) %>
+        </li>
+      </ul>
     </section>
   </aside>
 </div>

@@ -4,7 +4,8 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(login: "example", name: "Example User",
                      email: "user@example.com",
-                     password: "foobar", password_confirmation: "foobar")
+                     password: "foobar", password_confirmation: "foobar",
+                     birth_date: 30.years.ago)
   end
 
   test "should be valid" do
@@ -33,6 +34,11 @@ class UserTest < ActiveSupport::TestCase
 
   test "email should not be too long" do
     @user.email = "a" * 244 + "@example.com"
+    assert_not @user.valid?
+  end
+
+  test "name should not be too long" do
+    @user.name = "a" * 256
     assert_not @user.valid?
   end
 
@@ -67,6 +73,24 @@ class UserTest < ActiveSupport::TestCase
     invalid_logins.each do |invalid_login|
       @user.login = invalid_login
       assert_not @user.valid?, "#{invalid_login.inspect} should be invalid"
+    end
+  end
+
+  test "phone number validation should accept valid phone number" do
+    valid_numbers = [
+      "333-333-3333",
+      "(333) 333-3333",
+      "1-333-333-3333",
+      "333.333.3333",
+      "333-333-3333",
+      "333-333-3333 x3333",
+      "(333) 333-3333 x3333",
+      "1-333-333-3333 x3333",
+      "333.333.3333 x3333",
+    ]
+    valid_numbers.each do |valid_number|
+      @user.phone = valid_number
+      assert @user.valid?, "#{valid_number.inspect} should be valid"
     end
   end
 
