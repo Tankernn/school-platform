@@ -1,0 +1,12 @@
+<%= bootstrap_form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :login %>
+  <%= f.email_field :email %>
+  <%= f.phone_field :phone %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.select :gender, User.genders.keys, {} %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

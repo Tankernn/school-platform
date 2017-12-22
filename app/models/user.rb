@@ -14,7 +14,9 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 },
+                       if: lambda { new_record? || !password.blank? ||
+                                    !password_confirmation.blank? }
 
   enum gender: [ :unspecified, :male, :female, :other ]
 
