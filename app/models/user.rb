@@ -26,6 +26,8 @@ class User < ApplicationRecord
 
   validates :birth_date, presence: true
 
+  mount_uploader :picture, PictureUploader
+  validate :picture_size
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -55,4 +57,11 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  private
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB")
+      end
+    end
 end

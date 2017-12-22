@@ -39,6 +39,10 @@ gem 'bootstrap_form', '~> 2.7.0'
 gem 'bcrypt', '~> 3.1.7'
 # Use faker to generate seed data
 gem 'faker', '~> 1.7.3'
+# CarrierWave for image uploading
+gem 'carrierwave',             '1.1.0'
+# MiniMagick for image resizing
+gem 'mini_magick',             '4.7.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

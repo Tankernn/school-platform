@@ -7,6 +7,8 @@ All SchoolPlatform source code is licensed under the MIT License. See [LICENSE.m
 
 ## Getting started
 
+First, install `imagemagick` using your favorite package manager.
+
 To get started with the app, clone the repo and then install the needed gems:
 
 ```

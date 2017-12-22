@@ -1,7 +1,10 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-lg-4 col-md-6">
     <section class="user-info">
+      <%= link_to @user.picture.url do %>
+        <%= image_tag @user.picture.medium.url, class: 'profile-picture' if @user.picture? %>
+      <% end %>
       <h1>
         <%= @user.name %>
       </h1>
