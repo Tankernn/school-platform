@@ -15,7 +15,7 @@ User.create!(name:  "Example User",
              phone:      "(333) 333-3333")
 
 
-99.times do |n|
+10.times do |n|
  name  = Faker::Name.name
  email = "example-#{n+1}@example.com"
  password = "password"
