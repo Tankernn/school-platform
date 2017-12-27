@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(name:  "Example User",
+user = User.create!(name:  "Example User",
              login: "example",
              email: "example@example.com",
              password:              "foobar",
@@ -29,4 +29,13 @@ User.create!(name:  "Example User",
               password_confirmation: password,
               birth_date: birth_date,
               phone:      phone)
+end
+
+conversation = Conversation.create!(name: "Important conversation")
+
+ConversationParticipation.create!(conversation: conversation, user: user)
+
+10.times do |n|
+  content = Faker::Lorem.sentence(10)
+  Message.create!(user: user, conversation: conversation, content: content)
 end

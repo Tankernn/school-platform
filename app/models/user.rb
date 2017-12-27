@@ -29,6 +29,10 @@ class User < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validate :picture_size
 
+  has_many :messages
+  has_many :conversation_participations, dependent: :destroy
+  has_many :conversations, through: :conversation_participations
+
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
