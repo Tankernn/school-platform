@@ -3,6 +3,14 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
 
+  def index
+    respond_to do |format|
+      @users = User.all
+      format.json
+      format.html
+    end
+  end
+
   def show
   end
 

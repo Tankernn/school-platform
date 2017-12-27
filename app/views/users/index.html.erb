@@ -1,0 +1,26 @@
+<% provide(:title, "Users") %>
+<h1>Users</h1>
+<table width="100%" class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>
+        Picture
+      </th>
+      <th>
+        Name
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for user in @users %>
+      <tr>
+        <td>
+          <%= image_tag user.picture.small.url %>
+        </td>
+        <td>
+          <%= link_to user.name, user %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
