@@ -1,0 +1,97 @@
+<%= bootstrap_form_for(@conversation) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :name, label: "Topic" %>
+  
+  <%= f.label :participants %>
+  <div class="chips form-control">
+    <div class="chip-container">
+
+    </div>
+    <input class="search" type="text" />
+    <ul class="results">
+
+    </ul>
+  </div>
+
+  <%= f.fields_for :messages do |m| %>
+    <%= m.text_area :content %>
+  <% end %>
+
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
+<script>
+  function getArray() {
+    var elements = $(".chip-container").find("input");
+    var result = [];
+    for (var i = 0; i < elements.length; i++) {
+      result.push(parseInt(elements[i].value));
+    }
+    return result;
+  }
+
+  function addChip(user) {
+    $(".chip-container").append("<div id='" + user.id + "'>" + user.name + "</div>");
+    $("#" + user.id).append("<input type='hidden' name='conversation[user_ids][]' value='" + user.id + "' />");
+    $(".chip-container div").click(function() {
+      $(this).remove();
+    });
+    $(".search").val("");
+    $(".search").keyup();
+  }
+
+  var lastVal;
+
+  $(document).ready(function() {
+    $.get("/users.json", function(users) {
+
+      $(".chips").click(function() {
+        $(".search").focus();
+      });
+
+      $(".search").keydown(function(e) {
+        if (e.which === 13) {
+          e.preventDefault();
+        }
+        lastVal = $(this).val();
+      });
+
+      $(".search").keyup(function(e) {
+        $(".results").empty();
+        var val = $(this).val();
+
+        var filtered = users.filter(function(user) {
+          return user.name.toLowerCase().includes(val.toLowerCase())
+                  && getArray().indexOf(user.id) === -1;
+        });
+
+        if (e.which === 8) { // Backspace
+          if (!lastVal) {
+            $(".chip-container").children().last().remove();
+          }
+        }
+
+        if (val.length < 2) {
+          $(".results").hide();
+        } else if (e.which === 13) { // Return
+          if (filtered.length > 0) {
+            addChip(filtered[0]);
+          }
+        } else {
+          $(".results").show();
+          filtered.forEach(function(user) {
+            $(".results").append("<li user-id='" + user.id + "'>" + user.name + "</li>");
+          });
+
+          $(".results li").click(function() {
+            var id = $(this).attr("user-id");
+            var user = users.find(function(user) {
+              return user.id === parseInt(id);
+            });
+            addChip(user);
+          });
+        }
+      });
+    });
+  });
+</script>

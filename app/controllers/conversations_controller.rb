@@ -12,6 +12,33 @@ class ConversationsController < ApplicationController
   def show
   end
 
+  def new
+    @conversation = Conversation.new
+    @conversation.messages.build
+  end
+
+  def create
+    @conversation = Conversation.new(conversation_params)
+    @conversation.messages.each{ |message| message.user = current_user }
+    if @conversation.save
+      for id in params[:conversation][:user_ids].uniq
+        @conversation.users << User.find(id)
+      end
+      unless @conversation.users.include? current_user
+        @conversation.users << current_user
+      end
+
+      if @conversation.save
+        flash[:success] = "Created conversation"
+        redirect_to @conversation
+      else
+        render :new
+      end
+    else
+      render :new
+    end
+  end
+
   private
     def set_conversation
       @conversation = Conversation.find(params[:id])

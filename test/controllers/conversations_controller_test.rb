@@ -7,6 +7,17 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
     log_in_as @user
   end
 
+  test "should create valid conversation" do
+    get new_conversation_path
+    assert_response :success
+    assert_difference '@user.conversations.count', 1 do
+      post conversations_path, params: { conversation: {
+                               name: "Example conversation",
+                               user_ids: [@user.id, @other_user.id],
+                               messages_attributes: { "0" => { content: "Content" }}}}
+    end
+  end
+
   test "should redirect conversation which user is not participating in" do
     get conversation_path conversations(:two)
     assert_redirected_to root_path
