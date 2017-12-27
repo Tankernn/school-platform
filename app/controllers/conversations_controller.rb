@@ -3,6 +3,12 @@ class ConversationsController < ApplicationController
   before_action :set_conversation, only: [:show]
   before_action :check_permission, only: [:show]
 
+  def index
+    @conversations = current_user.conversations.sort_by{
+      |c| c.messages.last.created_at
+    }
+  end
+
   def show
   end
 

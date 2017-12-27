@@ -1,0 +1,15 @@
+<tr>
+  <td>
+    <%= link_to conversation.name, conversation %>
+  </td>
+  <td>
+    <% conversation.users.each do |user| %>
+      <%= link_to user_url(user), data_toggle: "tooltip", title: user.name do %>
+        <%= image_tag user.picture.tiny.url %>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <b><%= conversation.messages.last.user.name %>:</b> <%= truncate(conversation.messages.last.content) %>
+  </td>
+</tr>
