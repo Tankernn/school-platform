@@ -12,6 +12,40 @@
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= fa_icon "envelope fw" %>
+              <% count = unread_messages_count current_user %>
+              <% if count > 0 %>
+                (<span class="unread-messages"><%= count %></span>)
+              <% end %>
+              <%= fa_icon "caret-down" %>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+                <% for conversation in current_user.conversations.sort_by{ |conversation| conversation.messages.last.created_at }[0..1] %>
+                  <% message = conversation.messages.last %>
+                  <li>
+                      <%= link_to "#{conversation_path conversation}#message-#{message.id}" do %>
+                          <div>
+                            <span class="pull-right text-muted">
+                                <em><%= time_ago_in_words(message.created_at) %> ago</em>
+                            </span>
+                              <strong><%= message.user.name %></strong>
+
+                          </div>
+                          <div><%= truncate(message.content, length: 100) %></div>
+                      <% end %>
+                  </li>
+                  <li class="divider"></li>
+                <% end %>
+                <li>
+                    <%= link_to conversations_path, class: 'text-center' do %>
+                        <strong>Read All Messages</strong>
+                        <%= fa_icon("angle-right") %>
+                    <% end %>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <%= fa_icon "user fw" %><%= fa_icon "caret-down" %>
             </a>
             <ul class="dropdown-menu dropdown-user">

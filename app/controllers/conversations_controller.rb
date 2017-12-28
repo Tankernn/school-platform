@@ -10,6 +10,9 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    ConversationParticipation
+      .where(user: current_user, conversation: @conversation)
+      .update_all(viewed_at: Time.now)
   end
 
   def new

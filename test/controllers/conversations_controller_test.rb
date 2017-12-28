@@ -23,11 +23,14 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "last message should be shown in index" do
+  test "last message should be shown in index and dropdown" do
     message = @user.messages.build(content: "Hello, world!",
                                    conversation: conversations(:one))
     message.save
     get conversations_path
-    assert_match message.content, response.body
+    assert_select "tbody" do
+      assert_select "tr:nth-child(1)", text: /#{message.content}/
+    end
+    assert_select ".dropdown-messages li:nth-child(1)", text: /#{message.content}/
   end
 end
