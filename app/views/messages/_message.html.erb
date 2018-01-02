@@ -3,7 +3,7 @@
     <%= render message.user %>
   </div>
   <div class="panel-body">
-    <%= message.content %>
+    <%= format_content(message.content) %>
   </div>
   <div class="panel-footer">
     Posted at: <%= message.created_at %>
