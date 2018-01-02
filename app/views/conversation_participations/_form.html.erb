@@ -1,0 +1,8 @@
+<%= bootstrap_form_for(@conversation.conversation_participations.build) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.hidden_field :conversation_id, value: @conversation.id %>
+
+  <%= f.select :user_id, options_for_select(User.where.not(id: @conversation.users.map(&:id)).map{ |user| [user.name, user.id] }) %>
+
+  <%= f.submit "Add user", class: "btn btn-primary" %>
+<% end %>

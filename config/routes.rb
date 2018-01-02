@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   resources :users
   resources :conversations
+  resources :conversation_participations
   resources :messages
 end

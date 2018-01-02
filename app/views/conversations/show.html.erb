@@ -21,5 +21,13 @@
         </li>
       <% end %>
     </ul>
+    <h3>Add user to conversation</h3>
+    <%= render 'conversation_participations/form' %>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#conversation_participation_user_id').select2();
+  });
+</script>
