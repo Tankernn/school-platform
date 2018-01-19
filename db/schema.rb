@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222171109) do
+ActiveRecord::Schema.define(version: 20180119161200) do
+
+  create_table "administrations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_administrations_on_school_id"
+    t.index ["user_id", "school_id"], name: "index_administrations_on_user_id_and_school_id", unique: true
+    t.index ["user_id"], name: "index_administrations_on_user_id"
+  end
 
   create_table "conversation_participations", force: :cascade do |t|
     t.integer "user_id"
@@ -38,6 +48,12 @@ ActiveRecord::Schema.define(version: 20171222171109) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "login"
@@ -50,7 +66,9 @@ ActiveRecord::Schema.define(version: 20171222171109) do
     t.string "phone"
     t.date "birth_date"
     t.string "picture"
+    t.integer "school_id"
     t.index ["login"], name: "index_users_on_login", unique: true
+    t.index ["school_id_id"], name: "index_users_on_school_id_id"
   end
 
 end

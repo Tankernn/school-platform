@@ -1,12 +1,16 @@
 <%= bootstrap_form_for(@user) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
+  <% if current_user.is_administrator_at?(@user.school) %>
+    <%= f.text_field :name %>
+    <%= f.select :gender, User.genders.keys, {} %>
+    <%= f.date_field :birth_date %>
+  <% end %>
   <%= f.text_field :login %>
   <%= f.email_field :email %>
   <%= f.phone_field :phone %>
   <%= f.password_field :password %>
   <%= f.password_field :password_confirmation %>
-  <%= f.select :gender, User.genders.keys, {} %>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

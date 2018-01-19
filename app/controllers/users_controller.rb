@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     respond_to do |format|
-      @users = User.all
+      @users = current_user.school ? current_user.school.users : User.all
       format.json
       format.html
     end
@@ -37,14 +37,19 @@ class UsersController < ApplicationController
 
     # Only allow certain attributes to be updated over the web.
     def user_params
-      params.require(:user).permit(:login, :email, :password,
-                                   :password_confirmation,
-                                   :gender, :phone, :picture)
+      allowed = [:login, :email, :password, :password_confirmation,
+                :phone, :picture]
+
+      if current_user.is_administrator_at?(@user.school)
+        allowed += [:gender, :birth_date, :name]
+      end
+
+      params.require(:user).permit(*allowed)
     end
 
     # Confirms the correct user.
     def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      redirect_to(root_url) unless current_user?(@user) ||
+                                current_user.is_administrator_at?(@user.school)
     end
 end

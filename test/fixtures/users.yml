@@ -20,3 +20,11 @@ jane:
   email: jane.doe@example.com
   password_digest: <%= User.digest('password') %>
   birth_date: <%= 30.years.ago %>
+
+billy:
+  login: billy_9876
+  name: Billy McDonald
+  email: billy.mcdonald@example.com
+  password_digest: <%= User.digest('password') %>
+  birth_date: <%= 11.years.ago %>
+  school: two

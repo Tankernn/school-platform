@@ -33,6 +33,12 @@ class User < ApplicationRecord
   has_many :conversation_participations, dependent: :destroy
   has_many :conversations, through: :conversation_participations
 
+  has_many :administrations, dependent: :destroy
+  has_many :schools_administering, through: :administrations,
+                                   class_name: "School", source: :school
+
+  belongs_to :school, optional: true
+
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -60,6 +66,10 @@ class User < ApplicationRecord
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def is_administrator_at?(school)
+    school ? school.administrators.include?(self) : false
   end
 
   private

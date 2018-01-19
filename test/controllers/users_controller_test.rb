@@ -4,6 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:daniel)
     @other_user = users(:ben)
+    @student_user = users(:billy)
   end
 
   test "should display age correctly" do
@@ -53,18 +54,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal @user.reload.name, "Wrong Name"
   end
 
-  test "should redirect edit when logged in as wrong user" do
+  test "should redirect edit when unauthorized" do
     log_in_as(@other_user)
     get edit_user_path(@user)
     assert flash.empty?
     assert_redirected_to root_url
   end
 
-  test "should redirect update when logged in as wrong user" do
+  test "should redirect update when unauthorized" do
     log_in_as(@other_user)
     patch user_path(@user), params: { user: { name: @user.name,
                                               email: @user.email } }
     assert flash.empty?
     assert_redirected_to root_url
+  end
+
+  test "should update name attribute when logged in as admin" do
+    log_in_as(@user)
+    patch user_url(@student_user), params: { user: { name: "New Name" } }
+    assert_equal @student_user.reload.name, "New Name"
+    assert_redirected_to user_url(@student_user)
   end
 end
