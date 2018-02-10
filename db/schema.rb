@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180210170344) do
   create_table "conversation_participations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "conversation_id"
-    t.datetime "viewed_at"
+    t.datetime "viewed_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "conversation_id"], name: "index_participation_user_conversation", unique: true
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20180210170344) do
     t.integer "school_id"
     t.boolean "admin", default: false
     t.index ["login"], name: "index_users_on_login", unique: true
-    t.index ["school_id_id"], name: "index_users_on_school_id_id"
+    t.index ["school_id"], name: "index_users_on_school_id"
   end
 
 end
