@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180119161200) do
+ActiveRecord::Schema.define(version: 20180210170344) do
 
   create_table "administrations", force: :cascade do |t|
     t.integer "user_id"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20180119161200) do
     t.date "birth_date"
     t.string "picture"
     t.integer "school_id"
+    t.boolean "admin", default: false
     t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["school_id_id"], name: "index_users_on_school_id_id"
   end

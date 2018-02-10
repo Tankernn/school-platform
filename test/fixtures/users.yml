@@ -28,3 +28,11 @@ billy:
   password_digest: <%= User.digest('password') %>
   birth_date: <%= 11.years.ago %>
   school: two
+
+admin:
+  login: admin
+  name: Admin Administrator
+  email: admin@example.com
+  password_digest: <%= User.digest('password') %>
+  birth_date: <%= Time.now %>
+  admin: true

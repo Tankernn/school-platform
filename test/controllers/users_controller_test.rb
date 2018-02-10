@@ -5,6 +5,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:daniel)
     @other_user = users(:ben)
     @student_user = users(:billy)
+    @global_admin = users(:admin)
   end
 
   test "should display age correctly" do
@@ -69,10 +70,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  test "should update name attribute when logged in as admin" do
+  test "should update name attribute when logged in as school admin" do
     log_in_as(@user)
     patch user_url(@student_user), params: { user: { name: "New Name" } }
-    assert_equal @student_user.reload.name, "New Name"
+    assert_equal "New Name", @student_user.reload.name
+    assert_redirected_to user_url(@student_user)
+  end
+
+  test "should update name attribute when logged in as global admin" do
+    log_in_as(@global_admin)
+    patch user_url(@student_user), params: { user: { name: "New Name" } }
+    assert_equal "New Name", @student_user.reload.name
     assert_redirected_to user_url(@student_user)
   end
 end

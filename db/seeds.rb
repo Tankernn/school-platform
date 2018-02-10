@@ -15,7 +15,8 @@ user = User.create!(name:  "Example User",
              password_confirmation: "foobar",
              birth_date: 15.years.ago,
              phone:      "(333) 333-3333",
-             school: school)
+             school: school,
+             admin: true)
 
 school.administrators << user
 school.save

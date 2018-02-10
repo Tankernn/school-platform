@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :check_permission, only: [:edit, :update]
 
   def index
     respond_to do |format|
@@ -40,16 +40,27 @@ class UsersController < ApplicationController
       allowed = [:login, :email, :password, :password_confirmation,
                 :phone, :picture]
 
-      if current_user.is_administrator_at?(@user.school)
+      if can_administer?
         allowed += [:gender, :birth_date, :name]
+      end
+
+      if current_user.admin?
+        allowed += [:admin]
       end
 
       params.require(:user).permit(*allowed)
     end
 
     # Confirms the correct user.
-    def correct_user
-      redirect_to(root_url) unless current_user?(@user) ||
-                                current_user.is_administrator_at?(@user.school)
+    def check_permission
+      redirect_to(root_url) unless can_edit?
+    end
+
+    def can_edit?
+      current_user?(@user) || can_administer?
+    end
+
+    def can_administer?
+      current_user.is_administrator_at?(@user.school) || current_user.admin?
     end
 end
