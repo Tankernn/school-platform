@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :conversations
   resources :conversation_participations
   resources :messages
+  resources :schools
 end
