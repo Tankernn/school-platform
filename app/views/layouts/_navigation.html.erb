@@ -1,88 +1,89 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <%= link_to "School Platform", root_path, class: "navbar-brand" %>
-    </div>
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to "School Platform", root_path, class: "navbar-brand" %>
+  </div>
 
-    <ul class="nav navbar-top-links navbar-right">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <%= fa_icon "envelope fw" %>
-              <% count = unread_messages_count current_user %>
-              <% if count > 0 %>
-                (<span class="unread-messages"><%= count %></span>)
+  <ul class="nav navbar-top-links navbar-right">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <%= fa_icon "envelope fw" %>
+        <% count = unread_messages_count current_user %>
+          <% if count > 0 %>
+            (<span class="unread-messages"><%= count %></span>)
+          <% end %>
+          <%= fa_icon "caret-down" %>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+          <% for conversation in current_user.conversations.sort_by{ |conversation| conversation.messages.last.created_at }[0..1] %>
+            <% message = conversation.messages.last %>
+              <li>
+                <%= link_to "#{conversation_path conversation}#message-#{message.id}" do %>
+                <div>
+                  <span class="pull-right text-muted">
+                    <em><%= time_ago_in_words(message.created_at) %>
+                      ago</em>
+                  </span>
+                  <strong><%= message.user.name %></strong>
+
+                </div>
+                <div><%= truncate(message.content, length: 100) %></div>
               <% end %>
-              <%= fa_icon "caret-down" %>
-            </a>
-            <ul class="dropdown-menu dropdown-messages">
-                <% for conversation in current_user.conversations.sort_by{ |conversation| conversation.messages.last.created_at }[0..1] %>
-                  <% message = conversation.messages.last %>
-                  <li>
-                      <%= link_to "#{conversation_path conversation}#message-#{message.id}" do %>
-                          <div>
-                            <span class="pull-right text-muted">
-                                <em><%= time_ago_in_words(message.created_at) %> ago</em>
-                            </span>
-                              <strong><%= message.user.name %></strong>
-
-                          </div>
-                          <div><%= truncate(message.content, length: 100) %></div>
-                      <% end %>
-                  </li>
-                  <li class="divider"></li>
-                <% end %>
-                <li>
-                    <%= link_to conversations_path, class: 'text-center' do %>
-                        <strong>Read All Messages</strong>
-                        <%= fa_icon("angle-right") %>
-                    <% end %>
-                </li>
-            </ul>
+            </li>
+            <li class="divider"></li>
+          <% end %>
+          <li>
+            <%= link_to conversations_path, class: 'text-center' do %>
+            <strong>Read All Messages</strong>
+            <%= fa_icon("angle-right") %>
+          <% end %>
         </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <%= fa_icon "user fw" %><%= fa_icon "caret-down" %>
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li>
-                  <%= link_to fa_icon("user fw", text: "User Profile"), current_user %>
-                </li>
-                <li>
-                  <%= link_to fa_icon("gear fw", text: "Settings"), edit_user_path(current_user) %>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <%= link_to fa_icon("sign-out fw", text: "Logout"), logout_path, method: :delete %>
-                </li>
-            </ul>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <%= fa_icon "user fw" %><%= fa_icon "caret-down" %>
+      </a>
+      <ul class="dropdown-menu dropdown-user">
+        <li>
+          <%= link_to fa_icon("user fw", text: "User Profile"), current_user %>
         </li>
-    </ul>
+        <li>
+          <%= link_to fa_icon("gear fw", text: "Settings"), edit_user_path(current_user) %>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <%= link_to fa_icon("sign-out fw", text: "Logout"), logout_path, method: :delete %>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </li>
-                <li>
-                    <%= link_to fa_icon("home fw", text: "Home"), home_path %>
-                </li>
-                <li>
-                    <%= link_to fa_icon("envelope fw", text: "Conversations"), conversations_path %>
-                </li>
-            </ul>
-        </div>
+  <div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+      <ul class="nav" id="side-menu">
+        <li class="sidebar-search">
+          <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </li>
+        <li>
+          <%= link_to fa_icon("home fw", text: "Home"), home_path %>
+        </li>
+        <li>
+          <%= link_to fa_icon("envelope fw", text: "Conversations"), conversations_path %>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
