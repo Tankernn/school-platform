@@ -83,7 +83,7 @@
         <li>
           <%= link_to fa_icon("envelope fw", text: "Conversations"), conversations_path %>
         </li>
-        <% for school in (current_user.schools_administering + [current_user.school]).uniq do %>
+        <% for school in (current_user.schools_administering + [current_user.school]).uniq.compact do %>
           <li>
             <%= link_to fa_icon("building fw", text: school.name), school_path(school) %>
           </li>
