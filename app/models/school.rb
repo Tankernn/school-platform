@@ -5,5 +5,7 @@ class School < ApplicationRecord
   has_many :administrators, through: :administrations,
                             class_name: "User", source: :user
 
+  has_many :courses
+
   has_many :users
 end

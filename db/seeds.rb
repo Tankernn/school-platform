@@ -47,3 +47,10 @@ ConversationParticipation.create!(conversation: conversation, user: user)
   content = Faker::Lorem.sentence(10)
   Message.create!(user: user, conversation: conversation, content: content)
 end
+
+10.times do |n|
+  name = Faker::Educator.course
+  course = Course.create!(school: school, name: name, starts_on: DateTime.now, ends_on: 6.months.since)
+  CourseParticipation.create!(course: course, user: user, role: :teacher)
+  CourseParticipation.create!(course: course, user: User.find(2), role: :student)
+end
