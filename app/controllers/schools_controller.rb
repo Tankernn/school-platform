@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin, only: [:new, :edit, :create, :update]
+  before_action :check_admin, only: [:edit, :update]
   before_action :check_global_admin, only: [:new, :create]
 
   def show
