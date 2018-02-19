@@ -1,0 +1,12 @@
+<%= bootstrap_form_for(@course) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :name %>
+
+  <%= f.select :school_id, options_for_select(current_user.schools_administering.map{ |school| [school.name, school.id] }) %>
+
+  <%= f.date_field :starts_on %>
+  <%= f.date_field :ends_on %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

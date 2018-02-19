@@ -1,0 +1,42 @@
+<% provide(:title, @course.name) %>
+<div class="row">
+  <div class="col-md-12">
+    <h1><%= @course.name %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Teachers
+      </div>
+      <table class="panel-body table table-striped table-bordered table-hover">
+        <tbody>
+          <% for teacher in @course.users.merge(CourseParticipation.teachers) %>
+            <tr>
+              <td>
+                <%= render teacher %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Students
+      </div>
+      <table class="panel-body table table-striped table-bordered table-hover">
+        <tbody>
+          <% for student in @course.users.merge(CourseParticipation.students) %>
+            <tr>
+              <td>
+                <%= render student %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
