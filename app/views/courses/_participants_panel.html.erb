@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <%= role.to_s.capitalize.pluralize %>
+  </div>
+  <table class="panel-body table table-striped table-bordered table-hover">
+    <tbody>
+      <% for user in users %>
+        <tr>
+          <td>
+            <%= render user %>
+          </td>
+          <% if current_user.is_administrator_at?(@course.school) || current_user.admin? %>
+            <td>
+              <%= form_for @course.course_participations.find_by(user_id: user.id), html: { method: :delete } do |f| %>
+                <%= f.submit "Remove", class: "btn btn-danger" %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="panel-footer">
+    <% if current_user.is_administrator_at?(@course.school) || current_user.admin? %>
+      <%= render partial: 'course_participations/form', locals: { role: role } %>
+    <% end %>
+  </div>
+</div>

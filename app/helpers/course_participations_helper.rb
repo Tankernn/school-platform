@@ -1,0 +1,2 @@
+module CourseParticipationsHelper
+end
