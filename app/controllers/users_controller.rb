@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :courses]
   before_action :check_permission, only: [:edit, :update]
 
   def index
@@ -27,6 +27,12 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def courses
+    @title = "#{@user.name.possessive} courses"
+    @courses = @user.courses
+    render 'show_courses'
   end
 
   private

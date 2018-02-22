@@ -88,6 +88,9 @@
             <%= link_to fa_icon("building fw", text: school.name), school_path(school) %>
           </li>
         <% end %>
+        <li>
+          <%= link_to fa_icon("book fw", text: "Courses"), courses_user_path(current_user) %>
+        </li>
       </ul>
     </div>
   </div>

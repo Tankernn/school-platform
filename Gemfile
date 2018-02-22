@@ -34,6 +34,7 @@ gem "font-awesome-rails"
 # Bootstrap Forms
 gem 'bootstrap_form', '~> 2.7.0'
 gem 'select2-rails', '~> 4.0.3'
+gem 'possessive'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

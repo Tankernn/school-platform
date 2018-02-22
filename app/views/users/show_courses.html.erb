@@ -1,0 +1,20 @@
+<%= provide(:title, @title) %>
+<h1><%= @title %></h1>
+<div class="row">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <th>
+        Course
+      </th>
+    </thead>
+    <tbody>
+      <% for course in @courses %>
+        <tr>
+          <td>
+            <%= link_to course.name, course %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
