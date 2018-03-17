@@ -54,3 +54,12 @@ end
   CourseParticipation.create!(course: course, user: user, role: :teacher)
   CourseParticipation.create!(course: course, user: User.find(2), role: :student)
 end
+
+10.times do |n|
+  description = Faker::Lorem.sentence(10)
+  location = Faker::Address.street_address
+  course = Course.find(1)
+  start_at = (n + 1).hours.ago
+  end_at = n.hours.ago
+  Lecture.create(course: course, description: description, location: location, starts_at: start_at, ends_at: end_at)
+end

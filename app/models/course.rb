@@ -11,6 +11,7 @@ class Course < ApplicationRecord
   has_many :course_participations, dependent: :destroy
   has_many :users, through: :course_participations
 
+  has_many :lectures
 
   private
     def date_order
