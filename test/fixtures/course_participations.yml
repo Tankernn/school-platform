@@ -9,3 +9,13 @@ two:
   course: one
   user: billy
   role: student
+
+three:
+  course: two
+  user: daniel
+  role: teacher
+
+four:
+  course: two
+  user: ben
+  role: teacher

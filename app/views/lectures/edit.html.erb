@@ -1,0 +1,9 @@
+<% provide(:title, "Edit #{@lecture.course.name} lecture") %>
+<% provide(:button_text, 'Save changes') %>
+
+<h1>Update course</h1>
+<div class="row">
+  <div class="col-md-12">
+    <%= render 'form' %>
+  </div>
+</div>

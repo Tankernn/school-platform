@@ -8,5 +8,27 @@
   <div class="col-md-6">
     <%= render partial: 'participants_panel', locals: { users: @course.users.merge(CourseParticipation.teachers), role: :teacher } %>
     <%= render partial: 'participants_panel', locals: { users: @course.users.merge(CourseParticipation.students), role: :student } %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Lectures
+      </div>
+      <table class="panel-body table table-striped table-bordered table-hover">
+        <tbody>
+          <% for lecture in @course.lectures do %>
+            <tr>
+              <td>
+                <%= link_to lecture.starts_at, lecture %>
+              </td>
+              <td>
+                <%= lecture.location %>
+              </td>
+              <td>
+                <%= truncate(lecture.description, length: 70) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

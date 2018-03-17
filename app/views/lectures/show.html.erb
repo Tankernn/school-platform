@@ -1,0 +1,29 @@
+<% provide(:title, "#{@lecture.course.name} lecture") %>
+<div class="row">
+  <div class="col-md-12">
+    <h1><%= @lecture.course.name %> lecture</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <ul>
+      <li>
+        Course: <%= link_to @lecture.course.name, course_path(@lecture.course) %>
+      </li>
+      <li>
+        Time: <%= @lecture.starts_at %> to <%= @lecture.ends_at %>
+      </li>
+      <li>
+        Location: <%= @lecture.location %>
+      </li>
+    </ul>
+    <p>
+      <%= format_content(@lecture.description) %>
+    </p>
+    <% if can_edit_description? %>
+      <%= link_to edit_lecture_path(@lecture), class: "btn btn-primary" do %>
+        <%= fa_icon "edit", text: "Edit" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

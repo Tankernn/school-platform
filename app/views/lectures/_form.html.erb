@@ -1,0 +1,18 @@
+<%= bootstrap_form_for(@lecture) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <% if can_edit_full? %>
+    <%= f.select :course_id, options_for_select(current_user.schools_administering.map{ |school| school.courses }.flatten.map{ |course| [course.name, course.id] }) %>
+  <% else %>
+    <%= f.text_field :course, value: @lecture.course.name, disabled: true %>
+  <% end %>
+
+  <%= f.datetime_field :starts_at, disabled: !can_edit_full? %>
+  <%= f.datetime_field :ends_at, disabled: !can_edit_full? %>
+
+  <%= f.text_field :location, disabled: !can_edit_full? %>
+
+  <%= f.text_area :description %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
