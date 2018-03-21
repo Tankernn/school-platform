@@ -37,19 +37,27 @@ class LecturesController < ApplicationController
     @lecture = Lecture.find(params[:id])
   end
 
+  def current_course
+    begin
+      Course.find(params.require(:lecture)[:course_id])
+    rescue
+      @lecture.course
+    end
+  end
+
   def lecture_params
     allowed = [:description]
 
-    allowed += %i[course_id starts_at ends_at location] if helpers.can_edit_full?
+    allowed += %i[course_id starts_at ends_at location] if current_user.is_course_administrator?(current_course)
 
     params.require(:lecture).permit(*allowed)
   end
 
   def check_can_create
-    redirect_to root_url unless helpers.can_edit_full?
+    redirect_to root_url unless params.require(:lecture)[:course_id] && current_user.is_course_administrator?(current_course)
   end
 
   def check_can_edit
-    redirect_to root_url unless helpers.can_edit_description?
+    redirect_to root_url unless current_user.is_course_teacher?(@lecture.course)
   end
 end

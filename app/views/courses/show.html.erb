@@ -25,6 +25,13 @@
               <td>
                 <%= truncate(lecture.description, length: 70) %>
               </td>
+              <% if current_user.is_course_teacher?(@course) %>
+                <td>
+                  <%= link_to edit_lecture_path(lecture), class: "btn btn-primary" do %>
+                    <%= fa_icon "edit", text: "Edit" %>
+                  <% end %>
+                </td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

@@ -75,6 +75,14 @@ class User < ApplicationRecord
     school ? school.administrators.include?(self) : false
   end
 
+  def is_course_teacher?(course)
+    !course || course.users.merge(CourseParticipation.teachers).include?(self) || self.is_course_administrator?(course)
+  end
+
+  def is_course_administrator?(course)
+    !course || self.is_administrator_at?(course.school) || self.admin?
+  end
+
   private
     def picture_size
       if picture.size > 5.megabytes
