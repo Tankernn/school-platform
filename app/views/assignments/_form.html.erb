@@ -1,0 +1,17 @@
+<%= bootstrap_form_for(@assignment) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <% unless action_name == 'create' %>
+    <%= f.select :course_id, options_for_select(current_user.courses.merge(CourseParticipation.teachers).map{ |course| [course.name, course.id] }) %>
+  <% else %>
+    <%= f.text_field :course, value: @assignment.course.name, disabled: true %>
+  <% end %>
+
+  <%= f.text_field :name %>
+
+  <%= f.datetime_field :due_at %>
+
+  <%= f.text_area :description %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

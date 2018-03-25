@@ -1,0 +1,9 @@
+<% provide(:title, @assignment.name) %>
+
+<h1>Assignment</h1>
+
+<%= render @assignment %>
+
+<%= link_to edit_assignment_path(@assignment), class: "btn btn-primary" do %>
+  <%= fa_icon 'edit', text: "Edit" %>
+<% end if current_user.is_course_teacher?(@assignment.course) %>

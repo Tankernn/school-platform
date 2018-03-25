@@ -1,0 +1,16 @@
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <%= assignment.name %>
+  </div>
+  <div class="panel-body">
+    <p>
+      Course: <%= link_to assignment.course.name, assignment.course %>
+    </p>
+    <p>
+      <%= format_content(assignment.description) %>
+    </p>
+  </div>
+  <div class="panel-footer">
+    Due at: <%= assignment.due_at %>
+  </div>
+</div>

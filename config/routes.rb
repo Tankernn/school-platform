@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_participations
   resources :lectures
+  resources :assignments
 end
