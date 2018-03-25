@@ -12,6 +12,7 @@ class Course < ApplicationRecord
   has_many :users, through: :course_participations
 
   has_many :lectures
+  has_many :assignments
 
   private
     def date_order

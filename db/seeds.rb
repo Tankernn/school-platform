@@ -63,3 +63,11 @@ end
   end_at = n.hours.ago
   Lecture.create(course: course, description: description, location: location, starts_at: start_at, ends_at: end_at)
 end
+
+10.times do |n|
+  description = Faker::Lorem.paragraph
+  name = Faker::Lorem.sentence(2)
+  course = Course.find(Faker::Number.between(1, 10))
+  due_at = Faker::Number.between(1, 10).days.since
+  Assignment.create(course: course, name: name, description: description, due_at: due_at)
+end

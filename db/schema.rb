@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317095809) do
+ActiveRecord::Schema.define(version: 20180321081841) do
 
   create_table "administrations", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 20180317095809) do
     t.index ["school_id"], name: "index_administrations_on_school_id"
     t.index ["user_id", "school_id"], name: "index_administrations_on_user_id_and_school_id", unique: true
     t.index ["user_id"], name: "index_administrations_on_user_id"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer "course_id"
+    t.datetime "due_at"
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_assignments_on_course_id"
   end
 
   create_table "conversation_participations", force: :cascade do |t|
