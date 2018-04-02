@@ -1,9 +1,10 @@
 class LecturesController < ApplicationController
-  before_action :set_lecture, only: %i[show edit update destroy]
-  before_action :check_can_edit, only: %i[edit update]
-  before_action :check_can_create, only: %i[create]
+  before_action :set_lecture, only: [:show, :edit, :update, :destroy]
+  before_action :check_can_edit, only: [:edit, :update]
+  before_action :check_can_create, only: [:create]
 
-  def show; end
+  def show
+  end
 
   def new
     @lecture = Lecture.new
@@ -48,7 +49,7 @@ class LecturesController < ApplicationController
   def lecture_params
     allowed = [:description]
 
-    allowed += %i[course_id starts_at ends_at location] if current_user.is_course_administrator?(current_course)
+    allowed += [:course_id, :starts_at, :ends_at, :location] if current_user.is_course_administrator?(current_course)
 
     params.require(:lecture).permit(*allowed)
   end
