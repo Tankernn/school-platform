@@ -7,10 +7,21 @@
       Course: <%= link_to assignment.course.name, assignment.course %>
     </p>
     <p>
+      Due at: <%= assignment.due_at %>
+    </p>
+    <p>
       <%= format_content(assignment.description) %>
     </p>
   </div>
   <div class="panel-footer">
-    Due at: <%= assignment.due_at %>
+    <% if current_user.assignments.include?(assignment) %>
+      <%= link_to new_assignment_submission_url(assignment), class: 'btn btn-primary' do %>
+        <%= fa_icon 'file', text: "New Submission" %>
+      <% end %>
+    <% elsif assignment.course.users.merge(CourseParticipation.teachers).include?(current_user) %>
+      <%= link_to assignment_submissions_url(assignment), class: 'btn btn-primary' do %>
+        <%= fa_icon 'list', text: "View Submissions" %>
+      <% end %>
+    <% end %>
   </div>
 </div>

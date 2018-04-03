@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_participations
   resources :lectures
-  resources :assignments
+  resources :assignments do
+    resources :submissions, shallow: true
+  end
 end

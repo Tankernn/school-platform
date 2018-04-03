@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321081841) do
+ActiveRecord::Schema.define(version: 20180403104959) do
 
   create_table "administrations", force: :cascade do |t|
     t.integer "user_id"
@@ -68,6 +68,16 @@ ActiveRecord::Schema.define(version: 20180321081841) do
     t.index ["school_id"], name: "index_courses_on_school_id"
   end
 
+  create_table "group_participations", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "group_type"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_type", "group_id"], name: "index_group_participations_on_group_type_and_group_id"
+    t.index ["user_id"], name: "index_group_participations_on_user_id"
+  end
+
   create_table "lectures", force: :cascade do |t|
     t.integer "course_id"
     t.datetime "starts_at"
@@ -94,6 +104,15 @@ ActiveRecord::Schema.define(version: 20180321081841) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "assignment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_submissions_on_assignment_id"
   end
 
   create_table "users", force: :cascade do |t|

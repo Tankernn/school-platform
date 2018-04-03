@@ -1,0 +1,8 @@
+<%= bootstrap_form_for [@assignment, @submission] do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :title %>
+  <%= f.text_area :description %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

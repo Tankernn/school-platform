@@ -7,4 +7,6 @@ class Assignment < ApplicationRecord
   validates :due_at, presence: true
 
   default_scope { order(due_at: :asc) }
+
+  has_many :submissions, dependent: :destroy
 end

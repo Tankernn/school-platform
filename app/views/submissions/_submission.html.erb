@@ -1,0 +1,13 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <%= submission.title %>
+  </div>
+  <div class="panel-body">
+    <p>
+      Assignment: <%= link_to submission.assignment.name, submission.assignment %>
+    </p>
+    <p>
+      <%= format_content(submission.description) %>
+    </p>
+  </div>
+</div>
