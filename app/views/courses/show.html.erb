@@ -6,8 +6,7 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <%= render partial: 'participants_panel', locals: { users: @course.users.merge(CourseParticipation.teachers), role: :teacher } %>
-    <%= render partial: 'participants_panel', locals: { users: @course.users.merge(CourseParticipation.students), role: :student } %>
+    <%= render partial: 'participants_panel' %>
     <div class="panel panel-default">
       <div class="panel-heading">
         Lectures

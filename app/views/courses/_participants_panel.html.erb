@@ -1,17 +1,20 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= role.to_s.capitalize.pluralize %>
+    Course Members
   </div>
   <table class="panel-body table table-striped table-bordered table-hover">
     <tbody>
-      <% for user in users %>
+      <% for course_participation in @course.course_participations %>
         <tr>
           <td>
-            <%= render user %>
+            <%= render course_participation.user %>
+          </td>
+          <td>
+            <%= course_participation.role.to_s.capitalize %>
           </td>
           <% if current_user.is_administrator_at?(@course.school) || current_user.admin? %>
             <td>
-              <%= form_for @course.course_participations.find_by(user_id: user.id), html: { method: :delete } do |f| %>
+              <%= form_for course_participation, html: { method: :delete } do |f| %>
                 <%= f.submit "Remove", class: "btn btn-danger" %>
               <% end %>
             </td>
@@ -22,7 +25,7 @@
   </table>
   <div class="panel-footer">
     <% if current_user.is_administrator_at?(@course.school) || current_user.admin? %>
-      <%= render partial: 'course_participations/form', locals: { role: role } %>
+      <%= render partial: 'course_participations/form' %>
     <% end %>
   </div>
 </div>

@@ -8,4 +8,6 @@ class CourseParticipation < ApplicationRecord
 
   scope :teachers, -> { where(role: :teacher) }
   scope :students, -> { where(role: :student) }
+
+  default_scope { order(role: :desc) }
 end
