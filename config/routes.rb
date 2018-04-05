@@ -23,4 +23,9 @@ Rails.application.routes.draw do
   resources :assignments do
     resources :submissions, shallow: true
   end
+  resources :data_files do
+    member do
+      get :download
+    end
+  end
 end

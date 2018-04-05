@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403104959) do
+ActiveRecord::Schema.define(version: 20180404090939) do
 
   create_table "administrations", force: :cascade do |t|
     t.integer "user_id"
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 20180403104959) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["school_id"], name: "index_courses_on_school_id"
+  end
+
+  create_table "data_files", force: :cascade do |t|
+    t.string "name"
+    t.string "repository_type"
+    t.integer "repository_id"
+    t.string "uuid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_type", "repository_id"], name: "index_data_files_on_repository_type_and_repository_id"
   end
 
   create_table "group_participations", force: :cascade do |t|

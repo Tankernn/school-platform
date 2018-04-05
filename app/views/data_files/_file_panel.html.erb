@@ -1,0 +1,17 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    Files
+  </div>
+  <table class="panel-body table table-striped table-bordered table-hover">
+    <tbody>
+      <% for file in repository.data_files %>
+        <%= render file %>
+      <% end %>
+    </tbody>
+  </table>
+  <% if repository.can_upload_files?(current_user) %>
+    <div class="panel-footer">
+      <%= render 'data_files/form', repository: repository %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <%= link_to data_file.name, download_data_file_url(data_file) %>
+  </td>
+  <% if data_file.repository.can_upload_files?(current_user) %>
+    <td>
+      <%= form_for data_file, html: { method: :delete } do |f| %>
+        <%= f.submit "Remove", class: "btn btn-danger" %>
+      <% end %>
+    </td>
+  <% end %>
+</tr>

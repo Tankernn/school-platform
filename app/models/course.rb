@@ -14,6 +14,16 @@ class Course < ApplicationRecord
   has_many :lectures
   has_many :assignments
 
+  has_many :data_files, as: :repository
+
+  def can_download_files?(user)
+    self.users.include?(user)
+  end
+
+  def can_upload_files?(user)
+    self.users.merge(CourseParticipation.teachers).include?(user)
+  end
+
   private
     def date_order
       if ends_on < starts_on

@@ -1,0 +1,6 @@
+<%= bootstrap_form_for(DataFile.new) do |f| %>
+  <%= f.file_field :data, hide_label: true %>
+  <%= f.hidden_field :repository_id, value: repository.id %>
+  <%= f.hidden_field :repository_type, value: repository.class.name %>
+  <%= f.submit 'Upload file', class: 'btn btn-primary' %>
+<% end %>

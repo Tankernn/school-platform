@@ -8,4 +8,14 @@ class School < ApplicationRecord
   has_many :courses
 
   has_many :users
+
+  has_many :data_files, as: :repository
+
+  def can_download_files?(user)
+    self.users.include?(user) || self.administrators.include?(user)
+  end
+
+  def can_upload_files?(user)
+    self.administrators.include?(user)
+  end
 end
