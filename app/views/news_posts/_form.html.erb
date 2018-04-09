@@ -1,0 +1,11 @@
+<%= bootstrap_form_for(@news_post) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :name, label: 'Title' %>
+  <%= f.text_area :content %>
+
+  <%= f.hidden_field :news_feed_id %>
+  <%= f.hidden_field :news_feed_type %>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

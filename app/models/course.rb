@@ -24,6 +24,12 @@ class Course < ApplicationRecord
     self.users.merge(CourseParticipation.teachers).include?(user)
   end
 
+  has_many :news_posts, as: :news_feed
+
+  def can_post_news?(user)
+    self.users.merge(CourseParticipation.teachers).include?(user)
+  end
+
   private
     def date_order
       if ends_on < starts_on

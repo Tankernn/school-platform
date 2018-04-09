@@ -5,11 +5,16 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
-    <%= render partial: 'participants_panel' %>
-    <%= render partial: 'lectures_panel' %>
+  <div class="col-lg-4 col-md-6">
+    <%= render partial: 'news_posts/news_feed', locals: { news_feed: @course } %>
   </div>
-  <div class="col-md-6">
+  <div class="col-lg-4 col-md-6">
+    <%= render partial: 'participants_panel' %>
+  </div>
+  <div class="col-lg-4 col-md-6">
     <%= render partial: 'data_files/file_panel', locals: { repository: @course } %>
+  </div>
+  <div class="col-lg-8 col-md-6">
+    <%= render partial: 'lectures_panel' %>
   </div>
 </div>

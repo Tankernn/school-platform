@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404090939) do
+ActiveRecord::Schema.define(version: 20180407105907) do
 
   create_table "administrations", force: :cascade do |t|
     t.integer "user_id"
@@ -108,6 +108,18 @@ ActiveRecord::Schema.define(version: 20180404090939) do
     t.index ["conversation_id", "created_at"], name: "index_messages_on_conversation_id_and_created_at"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "news_posts", force: :cascade do |t|
+    t.string "name"
+    t.text "content"
+    t.integer "user_id"
+    t.string "news_feed_type"
+    t.integer "news_feed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["news_feed_type", "news_feed_id"], name: "index_news_posts_on_news_feed_type_and_news_feed_id"
+    t.index ["user_id"], name: "index_news_posts_on_user_id"
   end
 
   create_table "schools", force: :cascade do |t|

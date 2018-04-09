@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :news_posts
   root 'sessions#new'
 
   get '/home', to: 'static_pages#home'

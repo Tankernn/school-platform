@@ -6,6 +6,9 @@
 </div>
 <div class="row">
   <div class="col-md-6">
+    <%= render partial: 'news_posts/news_feed', locals: { news_feed: @school } %>
+  </div>
+  <div class="col-md-6">
     <%= render partial: 'data_files/file_panel', locals: { repository: @school } %>
   </div>
 </div>

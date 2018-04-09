@@ -71,3 +71,10 @@ end
   due_at = Faker::Number.between(1, 10).days.since
   Assignment.create(course: course, name: name, description: description, due_at: due_at)
 end
+
+5.times do |n|
+  name = Faker::Lorem.sentence(4)
+  content = Faker::Lorem.paragraph
+  course = Course.find(1)
+  NewsPost.create(user: user, content: content, name: name, news_feed: course)
+end

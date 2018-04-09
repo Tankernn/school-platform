@@ -1,0 +1,10 @@
+<h3>News feed</h3>
+<% for news_post in news_feed.news_posts do %>
+  <%= render news_post %>
+<% end %>
+<% if news_feed.can_post_news?(current_user) %>
+  <h4>New post</h4>
+
+  <% @news_post = news_feed.news_posts.build %>
+  <%= render 'news_posts/form' %>
+<% end %>
