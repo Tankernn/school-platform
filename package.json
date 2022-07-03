@@ -1,5 +1,8 @@
 {
   "name": "school_platform",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "webpack-dev-server": "^4.9.3"
+  }
 }
